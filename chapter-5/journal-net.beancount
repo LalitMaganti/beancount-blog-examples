@@ -1,0 +1,26 @@
+; NET VIEW: Payslip collapsed to take-home pay
+; Use this for day-to-day analysis
+
+option "operating_currency" "GBP"
+option "operating_currency" "USD"
+
+; NET VIEW: Consolidate payslip to Net-Income
+plugin "beancount_reds_plugins.rename_accounts.rename_accounts" "{
+  'Income:Lalit:UK:Google:Salary': 'Income:Lalit:UK:Google:Net-Income',
+  'Income:Lalit:UK:Google:Bonus': 'Income:Lalit:UK:Google:Net-Income',
+  'Expenses:Lalit:UK:Google:Income-Tax': 'Income:Lalit:UK:Google:Net-Income',
+  'Expenses:Lalit:UK:Google:National-Insurance': 'Income:Lalit:UK:Google:Net-Income',
+  'Expenses:Lalit:UK:Google:Pension': 'Income:Lalit:UK:Google:Net-Income',
+}"
+
+; Fava extensions
+2024-01-01 custom "fava-extension" "fava_dashboards"
+2024-01-01 custom "fava-extension" "fava_portfolio_returns" "{
+  'beangrow_config': 'beangrow.pbtxt',
+}"
+
+include "src/commodities.beancount"
+include "src/accounts.beancount"
+include "src/balance.beancount"
+include "src/transactions.beancount"
+include "src/prices.beancount"

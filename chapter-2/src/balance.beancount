@@ -1,0 +1,8 @@
+; Balance assertions
+
+; Opening balances using pad
+2024-01-01 pad Assets:Lalit:UK:HSBC:Current:GBP Equity:Opening-Balances
+2024-01-02 balance Assets:Lalit:UK:HSBC:Current:GBP  2500.00 GBP
+
+2024-01-01 pad Assets:Lalit:UK:Barclays:Current:GBP Equity:Opening-Balances
+2024-01-02 balance Assets:Lalit:UK:Barclays:Current:GBP  500.00 GBP

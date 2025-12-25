@@ -1,0 +1,18 @@
+; GROSS VIEW: Full payslip breakdown visible
+; Use this for tax analysis - see every line item
+
+option "operating_currency" "GBP"
+option "operating_currency" "USD"
+
+; GROSS VIEW: Payslip accounts (full breakdown)
+2024-01-01 open Income:Lalit:UK:Google:Salary           GBP
+2024-01-01 open Income:Lalit:UK:Google:Bonus            GBP
+2024-01-01 open Expenses:Lalit:UK:Google:Income-Tax       GBP
+2024-01-01 open Expenses:Lalit:UK:Google:National-Insurance GBP
+2024-01-01 open Expenses:Lalit:UK:Google:Pension          GBP
+
+include "src/commodities.beancount"
+include "src/accounts.beancount"
+include "src/balance.beancount"
+include "src/transactions.beancount"
+include "src/prices.beancount"

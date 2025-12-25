@@ -1,0 +1,10 @@
+; Lalit's personal accounts
+
+2024-01-01 open Assets:Lalit:UK:HSBC:Current:GBP     GBP
+2024-01-01 open Assets:Lalit:Transfers:Internal      GBP
+
+; Inter-person transfer accounts are opened in journal-net.beancount
+; (to avoid duplicates when combined in total view)
+
+; Income
+2024-01-01 open Income:Lalit:UK:Google:Net-Income  GBP

@@ -1,0 +1,27 @@
+; Combined household view
+; Inter-person transfers net to zero
+
+option "operating_currency" "GBP"
+
+; Fava extensions
+2024-01-01 custom "fava-extension" "fava_dashboards"
+
+; Shared infrastructure
+include "../common/src/commodities.beancount"
+include "../common/src/accounts.beancount"
+
+; Both people's ledgers
+include "../lalit/src/journal.beancount"
+include "../wife/src/journal.beancount"
+
+; Account for matched inter-person transfers
+2024-01-01 open Assets:Household:Transfers:Internal  GBP
+
+; Rename inter-person transfers to the shared household account
+; This makes them net to zero in the combined view
+plugin "beancount_reds_plugins.rename_accounts.rename_accounts" "{
+  'Expenses:Lalit:Transfers:Wife': 'Assets:Household:Transfers:Internal',
+  'Income:Wife:Transfers:Lalit': 'Assets:Household:Transfers:Internal',
+  'Expenses:Wife:Transfers:Lalit': 'Assets:Household:Transfers:Internal',
+  'Income:Lalit:Transfers:Wife': 'Assets:Household:Transfers:Internal',
+}"

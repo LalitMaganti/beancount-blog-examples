@@ -1,0 +1,16 @@
+; Chapter 2: Getting Started
+; Demonstrates naming conventions, transit accounts, and plugins
+
+option "title" "Chapter 2: Getting Started"
+option "operating_currency" "GBP"
+
+; Plugins for validation
+plugin "beancount_reds_plugins.zerosum.zerosum" "{
+  'zerosum_accounts': {
+    'Assets:Lalit:Transfers:Internal': ('Assets:Lalit:Transfers:Internal:Matched', 7),
+  }
+}"
+
+include "src/accounts.beancount"
+include "src/transactions.beancount"
+include "src/balance.beancount"

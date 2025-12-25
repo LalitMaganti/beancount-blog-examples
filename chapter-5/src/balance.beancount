@@ -1,0 +1,8 @@
+; Opening balances using pad + balance
+; This lets you start tracking from a known balance without historical data
+
+2024-01-01 pad Assets:Lalit:UK:HSBC:Current:GBP Equity:Opening-Balances
+2024-01-02 balance Assets:Lalit:UK:HSBC:Current:GBP  1500.00 GBP
+
+2024-01-01 pad Assets:Lalit:UK:Barclays:Savings:GBP Equity:Opening-Balances
+2024-01-02 balance Assets:Lalit:UK:Barclays:Savings:GBP  5000.00 GBP

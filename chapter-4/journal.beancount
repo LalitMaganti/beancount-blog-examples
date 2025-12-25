@@ -1,0 +1,11 @@
+; Chapter 4: Investments
+; Adds commodities, prices, and cost basis tracking
+
+option "operating_currency" "GBP"
+option "operating_currency" "USD"
+
+include "src/commodities.beancount"
+include "src/accounts.beancount"
+include "src/balance.beancount"
+include "src/transactions.beancount"
+include "src/prices.beancount"

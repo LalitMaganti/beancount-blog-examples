@@ -1,0 +1,19 @@
+; Wife's transactions
+
+2024-01-05 * "Opening balance"
+  Assets:Wife:UK:HSBC:Current:GBP    3000.00 GBP
+  Equity:Opening-Balances
+
+2024-01-28 * "Employer" "January salary"
+  Assets:Wife:UK:HSBC:Current:GBP    2800.00 GBP
+  Income:Wife:UK:Employer:Net-Income
+
+; Wife pays energy bill (shared expense)
+2024-01-18 * "British Gas" "Energy bill"
+  Expenses:Bills:Energy                120.00 GBP
+  Assets:Wife:UK:HSBC:Current:GBP
+
+; Wife receives money from Lalit
+2024-01-20 * "Transfer from Lalit"
+  Assets:Wife:UK:HSBC:Current:GBP     500.00 GBP
+  Income:Wife:Transfers:Lalit

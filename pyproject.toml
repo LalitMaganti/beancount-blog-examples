@@ -1,0 +1,24 @@
+[project]
+name = "beancount-blog-examples"
+version = "0.1.0"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: End Users/Desktop",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Office/Business :: Financial :: Accounting",
+]
+dependencies = [
+    "beancount",
+    "beancount-import @ git+https://github.com/LalitMaganti/beancount-import.git",
+    "beancount-reds-plugins",
+    "fava>=1.30.8",
+    "fava-dashboards @ git+https://github.com/andreasgerstmayr/fava-dashboards.git",
+    "fava-portfolio-returns @ git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git",
+    "setuptools",
+]
+
+[tool.uv]
+package = false

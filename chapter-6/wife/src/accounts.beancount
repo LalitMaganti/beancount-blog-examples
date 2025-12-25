@@ -1,0 +1,10 @@
+; Wife's personal accounts
+
+2024-01-01 open Assets:Wife:UK:HSBC:Current:GBP     GBP
+2024-01-01 open Assets:Wife:Transfers:Internal      GBP
+
+; Inter-person transfer accounts are opened in journal-net.beancount
+; (to avoid duplicates when combined in total view)
+
+; Income
+2024-01-01 open Income:Wife:UK:Employer:Net-Income GBP

@@ -1,0 +1,1772 @@
+option "title" "Demo Financials"
+option "operating_currency" "GBP"
+plugin "beancount.plugins.auto_accounts"
+
+; Fava extensions
+2020-01-01 custom "fava-extension" "fava_dashboards"
+2020-01-01 custom "fava-extension" "fava_portfolio_returns" "{
+  'beangrow_config': 'beangrow.pbtxt',
+}"
+
+; Commodities
+2020-01-01 commodity GOOG
+  name: "Alphabet Inc Class C"
+2020-01-01 commodity VWRL
+  name: "Vanguard FTSE All-World UCITS ETF"
+2020-01-01 commodity USD
+2020-01-01 commodity GBP
+
+2020-01-01 open Assets:Lalit:UK:HSBC:Current:GBP          GBP
+2020-01-01 open Assets:Lalit:UK:Vanguard:ISA:VWRL         VWRL
+2020-01-01 open Assets:Lalit:UK:Vanguard:ISA:GBP          GBP
+2020-01-01 open Assets:Lalit:UK:Vanguard:GIA:VWRL         VWRL
+2020-01-01 open Assets:Lalit:UK:Vanguard:GIA:GBP          GBP
+2020-01-01 open Assets:Lalit:US:Schwab:Brokerage:GOOG     GOOG
+2020-01-01 open Assets:Lalit:US:Schwab:Brokerage:USD      USD
+2020-01-01 open Liabilities:Lalit:UK:Amex:GBP             GBP
+2020-01-01 open Income:Lalit:UK:Google:Salary             GBP
+2020-01-01 open Income:Lalit:UK:Google:Stock-Vest         USD
+2020-01-01 open Expenses:Housing:Rent                     GBP
+2020-01-01 open Expenses:Food:Groceries                   GBP
+2020-01-01 open Expenses:Food:Restaurant                  GBP
+2020-01-01 open Expenses:Transport:Tube                   GBP
+2020-01-01 open Equity:Opening-Balances                   GBP
+
+; Initial Balance
+2021-12-31 * "Opening Balance"
+  Assets:Lalit:UK:HSBC:Current:GBP              5000.00 GBP
+  Equity:Opening-Balances
+
+2022-01-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2022-01-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2022-01-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       272.00 USD
+  Income:Lalit:UK:Google:Stock-Vest         -272.00 USD
+
+2022-01-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {136.00 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -272.00 USD
+
+2022-01-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           924.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -924.00 GBP
+
+2022-01-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          11 VWRL {84.00 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -924.00 GBP
+
+2022-01-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           756.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -756.00 GBP
+
+2022-01-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          9 VWRL {84.00 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -756.00 GBP
+
+2022-01-01 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   36.50 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -36.50 GBP
+
+2022-01-04 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    67.97 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -67.97 GBP
+
+2022-01-04 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   33.12 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -33.12 GBP
+
+2022-01-05 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   31.93 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -31.93 GBP
+
+2022-01-08 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   68.35 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -68.35 GBP
+
+2022-01-12 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    106.27 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -106.27 GBP
+
+2022-01-18 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   33.67 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -33.67 GBP
+
+2022-01-19 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   33.97 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -33.97 GBP
+
+2022-01-20 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    55.02 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -55.02 GBP
+
+2022-01-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2022-01-30 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    58.39 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -58.39 GBP
+
+2022-02-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2022-02-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2022-02-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       264.58 USD
+  Income:Lalit:UK:Google:Stock-Vest         -264.58 USD
+
+2022-02-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {132.29 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -264.58 USD
+
+2022-02-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           956.76 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -956.76 GBP
+
+2022-02-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          12 VWRL {79.73 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -956.76 GBP
+
+2022-02-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           797.30 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -797.30 GBP
+
+2022-02-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          10 VWRL {79.73 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -797.30 GBP
+
+2022-02-09 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    34.24 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -34.24 GBP
+
+2022-02-11 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   42.90 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -42.90 GBP
+
+2022-02-14 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    94.86 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -94.86 GBP
+
+2022-02-25 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   39.45 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -39.45 GBP
+
+2022-02-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2022-02-26 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    113.62 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -113.62 GBP
+
+2022-02-28 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    109.02 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -109.02 GBP
+
+2022-03-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2022-03-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2022-03-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       267.02 USD
+  Income:Lalit:UK:Google:Stock-Vest         -267.02 USD
+
+2022-03-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {133.51 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -267.02 USD
+
+2022-03-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           958.56 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -958.56 GBP
+
+2022-03-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          12 VWRL {79.88 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -958.56 GBP
+
+2022-03-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           798.80 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -798.80 GBP
+
+2022-03-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          10 VWRL {79.88 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -798.80 GBP
+
+2022-03-01 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    73.74 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -73.74 GBP
+
+2022-03-01 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   65.64 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -65.64 GBP
+
+2022-03-10 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    50.22 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -50.22 GBP
+
+2022-03-12 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   57.87 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -57.87 GBP
+
+2022-03-14 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   34.28 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -34.28 GBP
+
+2022-03-16 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    114.20 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -114.20 GBP
+
+2022-03-19 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    68.79 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -68.79 GBP
+
+2022-03-22 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    66.24 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -66.24 GBP
+
+2022-03-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2022-03-28 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   79.96 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -79.96 GBP
+
+2022-04-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2022-04-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2022-04-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       279.28 USD
+  Income:Lalit:UK:Google:Stock-Vest         -279.28 USD
+
+2022-04-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {139.64 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -279.28 USD
+
+2022-04-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           918.28 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -918.28 GBP
+
+2022-04-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          11 VWRL {83.48 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -918.28 GBP
+
+2022-04-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           751.32 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -751.32 GBP
+
+2022-04-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          9 VWRL {83.48 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -751.32 GBP
+
+2022-04-02 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    64.11 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -64.11 GBP
+
+2022-04-10 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    82.58 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -82.58 GBP
+
+2022-04-15 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    110.13 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -110.13 GBP
+
+2022-04-23 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    71.25 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -71.25 GBP
+
+2022-04-24 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   32.79 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -32.79 GBP
+
+2022-04-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2022-04-30 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   69.03 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -69.03 GBP
+
+2022-05-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2022-05-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2022-05-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       228.20 USD
+  Income:Lalit:UK:Google:Stock-Vest         -228.20 USD
+
+2022-05-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {114.10 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -228.20 USD
+
+2022-05-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           977.64 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -977.64 GBP
+
+2022-05-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          12 VWRL {81.47 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -977.64 GBP
+
+2022-05-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           733.23 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -733.23 GBP
+
+2022-05-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          9 VWRL {81.47 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -733.23 GBP
+
+2022-05-03 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    39.63 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -39.63 GBP
+
+2022-05-10 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    99.40 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -99.40 GBP
+
+2022-05-13 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    36.77 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -36.77 GBP
+
+2022-05-16 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    41.47 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -41.47 GBP
+
+2022-05-20 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    100.21 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -100.21 GBP
+
+2022-05-25 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    96.29 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -96.29 GBP
+
+2022-05-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2022-05-29 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    108.50 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -108.50 GBP
+
+2022-06-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2022-06-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2022-06-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       223.90 USD
+  Income:Lalit:UK:Google:Stock-Vest         -223.90 USD
+
+2022-06-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {111.95 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -223.90 USD
+
+2022-06-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           960.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -960.00 GBP
+
+2022-06-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          12 VWRL {80.00 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -960.00 GBP
+
+2022-06-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           800.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -800.00 GBP
+
+2022-06-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          10 VWRL {80.00 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -800.00 GBP
+
+2022-06-02 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    47.38 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -47.38 GBP
+
+2022-06-07 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    117.34 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -117.34 GBP
+
+2022-06-09 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    69.11 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -69.11 GBP
+
+2022-06-13 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   75.53 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -75.53 GBP
+
+2022-06-16 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   59.85 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -59.85 GBP
+
+2022-06-25 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   37.21 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -37.21 GBP
+
+2022-06-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2022-07-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2022-07-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2022-07-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       216.52 USD
+  Income:Lalit:UK:Google:Stock-Vest         -216.52 USD
+
+2022-07-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {108.26 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -216.52 USD
+
+2022-07-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           996.97 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -996.97 GBP
+
+2022-07-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          13 VWRL {76.69 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -996.97 GBP
+
+2022-07-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           766.90 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -766.90 GBP
+
+2022-07-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          10 VWRL {76.69 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -766.90 GBP
+
+2022-07-01 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    76.39 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -76.39 GBP
+
+2022-07-05 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    52.04 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -52.04 GBP
+
+2022-07-06 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   44.87 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -44.87 GBP
+
+2022-07-10 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    97.59 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -97.59 GBP
+
+2022-07-11 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    68.26 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -68.26 GBP
+
+2022-07-13 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    52.43 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -52.43 GBP
+
+2022-07-25 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    55.72 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -55.72 GBP
+
+2022-07-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2022-07-27 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    50.81 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -50.81 GBP
+
+2022-07-28 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   44.46 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -44.46 GBP
+
+2022-08-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2022-08-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2022-08-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       231.52 USD
+  Income:Lalit:UK:Google:Stock-Vest         -231.52 USD
+
+2022-08-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {115.76 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -231.52 USD
+
+2022-08-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           968.40 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -968.40 GBP
+
+2022-08-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          12 VWRL {80.70 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -968.40 GBP
+
+2022-08-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           726.30 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -726.30 GBP
+
+2022-08-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          9 VWRL {80.70 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -726.30 GBP
+
+2022-08-03 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    61.66 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -61.66 GBP
+
+2022-08-08 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   40.17 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -40.17 GBP
+
+2022-08-11 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    86.00 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -86.00 GBP
+
+2022-08-11 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   43.64 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -43.64 GBP
+
+2022-08-12 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   58.56 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -58.56 GBP
+
+2022-08-13 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    71.55 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -71.55 GBP
+
+2022-08-13 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   42.75 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -42.75 GBP
+
+2022-08-18 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    78.55 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -78.55 GBP
+
+2022-08-22 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   29.14 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -29.14 GBP
+
+2022-08-23 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    90.25 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -90.25 GBP
+
+2022-08-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2022-08-27 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    103.74 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -103.74 GBP
+
+2022-08-28 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    32.31 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -32.31 GBP
+
+2022-08-31 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    92.16 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -92.16 GBP
+
+2022-09-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2022-09-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2022-09-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       220.92 USD
+  Income:Lalit:UK:Google:Stock-Vest         -220.92 USD
+
+2022-09-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {110.46 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -220.92 USD
+
+2022-09-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           999.36 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -999.36 GBP
+
+2022-09-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          12 VWRL {83.28 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -999.36 GBP
+
+2022-09-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           749.52 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -749.52 GBP
+
+2022-09-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          9 VWRL {83.28 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -749.52 GBP
+
+2022-09-01 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    99.52 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -99.52 GBP
+
+2022-09-16 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    109.35 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -109.35 GBP
+
+2022-09-18 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   71.06 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -71.06 GBP
+
+2022-09-22 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   76.88 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -76.88 GBP
+
+2022-09-23 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    94.81 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -94.81 GBP
+
+2022-09-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2022-10-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2022-10-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2022-10-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       190.86 USD
+  Income:Lalit:UK:Google:Stock-Vest         -190.86 USD
+
+2022-10-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {95.43 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -190.86 USD
+
+2022-10-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           941.04 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -941.04 GBP
+
+2022-10-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          12 VWRL {78.42 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -941.04 GBP
+
+2022-10-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           784.20 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -784.20 GBP
+
+2022-10-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          10 VWRL {78.42 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -784.20 GBP
+
+2022-10-03 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    47.33 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -47.33 GBP
+
+2022-10-10 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   52.05 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -52.05 GBP
+
+2022-10-13 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    108.16 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -108.16 GBP
+
+2022-10-16 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   76.46 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -76.46 GBP
+
+2022-10-18 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   57.77 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -57.77 GBP
+
+2022-10-19 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    43.43 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -43.43 GBP
+
+2022-10-21 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    98.80 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -98.80 GBP
+
+2022-10-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2022-10-30 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   20.16 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -20.16 GBP
+
+2022-11-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2022-11-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2022-11-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       191.72 USD
+  Income:Lalit:UK:Google:Stock-Vest         -191.72 USD
+
+2022-11-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {95.86 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -191.72 USD
+
+2022-11-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           942.36 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -942.36 GBP
+
+2022-11-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          12 VWRL {78.53 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -942.36 GBP
+
+2022-11-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           785.30 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -785.30 GBP
+
+2022-11-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          10 VWRL {78.53 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -785.30 GBP
+
+2022-11-09 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    44.93 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -44.93 GBP
+
+2022-11-15 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    68.88 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -68.88 GBP
+
+2022-11-20 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   65.38 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -65.38 GBP
+
+2022-11-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2022-12-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2022-12-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2022-12-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       193.74 USD
+  Income:Lalit:UK:Google:Stock-Vest         -193.74 USD
+
+2022-12-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {96.87 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -193.74 USD
+
+2022-12-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           966.24 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -966.24 GBP
+
+2022-12-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          12 VWRL {80.52 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -966.24 GBP
+
+2022-12-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           724.68 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -724.68 GBP
+
+2022-12-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          9 VWRL {80.52 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -724.68 GBP
+
+2022-12-10 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    117.58 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -117.58 GBP
+
+2022-12-13 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    119.30 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -119.30 GBP
+
+2022-12-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2023-01-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2023-01-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2023-01-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       176.12 USD
+  Income:Lalit:UK:Google:Stock-Vest         -176.12 USD
+
+2023-01-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {88.06 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -176.12 USD
+
+2023-01-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           941.52 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -941.52 GBP
+
+2023-01-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          12 VWRL {78.46 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -941.52 GBP
+
+2023-01-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           784.60 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -784.60 GBP
+
+2023-01-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          10 VWRL {78.46 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -784.60 GBP
+
+2023-01-02 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   64.68 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -64.68 GBP
+
+2023-01-06 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   50.14 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -50.14 GBP
+
+2023-01-18 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   24.11 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -24.11 GBP
+
+2023-01-24 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   67.77 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -67.77 GBP
+
+2023-01-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2023-01-26 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    77.80 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -77.80 GBP
+
+2023-01-28 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    108.38 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -108.38 GBP
+
+2023-01-30 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    71.50 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -71.50 GBP
+
+2023-01-31 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   68.28 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -68.28 GBP
+
+2023-02-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2023-02-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2023-02-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       199.90 USD
+  Income:Lalit:UK:Google:Stock-Vest         -199.90 USD
+
+2023-02-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {99.95 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -199.90 USD
+
+2023-02-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           983.88 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -983.88 GBP
+
+2023-02-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          12 VWRL {81.99 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -983.88 GBP
+
+2023-02-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           737.91 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -737.91 GBP
+
+2023-02-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          9 VWRL {81.99 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -737.91 GBP
+
+2023-02-13 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    84.58 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -84.58 GBP
+
+2023-02-23 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    56.56 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -56.56 GBP
+
+2023-02-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2023-03-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2023-03-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2023-03-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       177.36 USD
+  Income:Lalit:UK:Google:Stock-Vest         -177.36 USD
+
+2023-03-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {88.68 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -177.36 USD
+
+2023-03-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           982.56 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -982.56 GBP
+
+2023-03-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          12 VWRL {81.88 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -982.56 GBP
+
+2023-03-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           736.92 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -736.92 GBP
+
+2023-03-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          9 VWRL {81.88 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -736.92 GBP
+
+2023-03-08 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    78.29 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -78.29 GBP
+
+2023-03-12 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   73.05 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -73.05 GBP
+
+2023-03-14 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   69.43 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -69.43 GBP
+
+2023-03-24 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    74.04 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -74.04 GBP
+
+2023-03-25 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   42.23 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -42.23 GBP
+
+2023-03-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2023-03-31 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    106.32 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -106.32 GBP
+
+2023-04-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2023-04-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2023-04-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       206.44 USD
+  Income:Lalit:UK:Google:Stock-Vest         -206.44 USD
+
+2023-04-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {103.22 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -206.44 USD
+
+2023-04-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           980.76 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -980.76 GBP
+
+2023-04-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          12 VWRL {81.73 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -980.76 GBP
+
+2023-04-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           735.57 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -735.57 GBP
+
+2023-04-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          9 VWRL {81.73 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -735.57 GBP
+
+2023-04-02 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   67.21 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -67.21 GBP
+
+2023-04-04 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   65.91 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -65.91 GBP
+
+2023-04-07 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    111.05 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -111.05 GBP
+
+2023-04-07 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   71.50 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -71.50 GBP
+
+2023-04-08 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    41.70 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -41.70 GBP
+
+2023-04-10 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    31.34 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -31.34 GBP
+
+2023-04-12 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   64.50 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -64.50 GBP
+
+2023-04-17 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    100.49 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -100.49 GBP
+
+2023-04-19 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   48.74 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -48.74 GBP
+
+2023-04-22 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    37.27 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -37.27 GBP
+
+2023-04-23 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    54.75 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -54.75 GBP
+
+2023-04-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2023-04-27 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    93.16 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -93.16 GBP
+
+2023-05-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2023-05-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2023-05-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       214.82 USD
+  Income:Lalit:UK:Google:Stock-Vest         -214.82 USD
+
+2023-05-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {107.41 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -214.82 USD
+
+2023-05-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           979.68 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -979.68 GBP
+
+2023-05-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          12 VWRL {81.64 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -979.68 GBP
+
+2023-05-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           734.76 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -734.76 GBP
+
+2023-05-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          9 VWRL {81.64 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -734.76 GBP
+
+2023-05-05 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   69.91 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -69.91 GBP
+
+2023-05-06 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    38.69 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -38.69 GBP
+
+2023-05-16 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    106.08 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -106.08 GBP
+
+2023-05-21 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    113.62 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -113.62 GBP
+
+2023-05-24 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   72.19 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -72.19 GBP
+
+2023-05-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2023-05-26 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    86.99 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -86.99 GBP
+
+2023-05-26 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   64.77 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -64.77 GBP
+
+2023-05-31 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    44.17 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -44.17 GBP
+
+2023-06-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2023-06-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2023-06-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       248.98 USD
+  Income:Lalit:UK:Google:Stock-Vest         -248.98 USD
+
+2023-06-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {124.49 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -248.98 USD
+
+2023-06-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           917.18 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -917.18 GBP
+
+2023-06-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          11 VWRL {83.38 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -917.18 GBP
+
+2023-06-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           750.42 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -750.42 GBP
+
+2023-06-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          9 VWRL {83.38 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -750.42 GBP
+
+2023-06-07 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   43.72 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -43.72 GBP
+
+2023-06-08 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   38.09 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -38.09 GBP
+
+2023-06-11 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    97.23 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -97.23 GBP
+
+2023-06-14 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   71.71 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -71.71 GBP
+
+2023-06-15 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    31.69 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -31.69 GBP
+
+2023-06-19 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    59.23 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -59.23 GBP
+
+2023-06-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2023-06-27 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    75.90 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -75.90 GBP
+
+2023-07-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2023-07-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2023-07-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       240.12 USD
+  Income:Lalit:UK:Google:Stock-Vest         -240.12 USD
+
+2023-07-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {120.06 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -240.12 USD
+
+2023-07-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           931.26 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -931.26 GBP
+
+2023-07-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          11 VWRL {84.66 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -931.26 GBP
+
+2023-07-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           761.94 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -761.94 GBP
+
+2023-07-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          9 VWRL {84.66 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -761.94 GBP
+
+2023-07-09 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   46.53 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -46.53 GBP
+
+2023-07-11 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    75.66 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -75.66 GBP
+
+2023-07-12 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   69.90 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -69.90 GBP
+
+2023-07-13 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    107.78 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -107.78 GBP
+
+2023-07-20 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    39.32 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -39.32 GBP
+
+2023-07-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2023-07-29 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    38.51 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -38.51 GBP
+
+2023-08-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2023-08-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2023-08-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       264.02 USD
+  Income:Lalit:UK:Google:Stock-Vest         -264.02 USD
+
+2023-08-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {132.01 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -264.02 USD
+
+2023-08-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           953.81 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -953.81 GBP
+
+2023-08-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          11 VWRL {86.71 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -953.81 GBP
+
+2023-08-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           780.39 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -780.39 GBP
+
+2023-08-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          9 VWRL {86.71 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -780.39 GBP
+
+2023-08-15 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    36.94 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -36.94 GBP
+
+2023-08-16 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    99.38 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -99.38 GBP
+
+2023-08-17 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   40.21 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -40.21 GBP
+
+2023-08-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2023-09-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2023-09-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2023-09-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       271.54 USD
+  Income:Lalit:UK:Google:Stock-Vest         -271.54 USD
+
+2023-09-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {135.77 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -271.54 USD
+
+2023-09-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           948.86 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -948.86 GBP
+
+2023-09-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          11 VWRL {86.26 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -948.86 GBP
+
+2023-09-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           776.34 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -776.34 GBP
+
+2023-09-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          9 VWRL {86.26 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -776.34 GBP
+
+2023-09-05 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    106.13 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -106.13 GBP
+
+2023-09-08 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    69.37 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -69.37 GBP
+
+2023-09-10 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   23.20 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -23.20 GBP
+
+2023-09-13 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    113.77 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -113.77 GBP
+
+2023-09-15 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    55.82 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -55.82 GBP
+
+2023-09-18 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    37.13 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -37.13 GBP
+
+2023-09-21 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    55.93 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -55.93 GBP
+
+2023-09-22 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    67.78 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -67.78 GBP
+
+2023-09-25 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    76.38 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -76.38 GBP
+
+2023-09-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2023-09-26 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    68.63 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -68.63 GBP
+
+2023-09-29 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   51.56 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -51.56 GBP
+
+2023-10-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2023-10-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2023-10-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       261.72 USD
+  Income:Lalit:UK:Google:Stock-Vest         -261.72 USD
+
+2023-10-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {130.86 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -261.72 USD
+
+2023-10-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           940.61 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -940.61 GBP
+
+2023-10-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          11 VWRL {85.51 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -940.61 GBP
+
+2023-10-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           769.59 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -769.59 GBP
+
+2023-10-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          9 VWRL {85.51 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -769.59 GBP
+
+2023-10-04 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    100.97 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -100.97 GBP
+
+2023-10-07 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   52.76 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -52.76 GBP
+
+2023-10-11 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   66.57 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -66.57 GBP
+
+2023-10-13 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    47.95 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -47.95 GBP
+
+2023-10-13 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   76.00 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -76.00 GBP
+
+2023-10-19 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    63.12 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -63.12 GBP
+
+2023-10-25 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    84.22 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -84.22 GBP
+
+2023-10-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2023-10-27 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    89.48 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -89.48 GBP
+
+2023-10-30 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    108.30 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -108.30 GBP
+
+2023-11-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2023-11-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2023-11-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       244.94 USD
+  Income:Lalit:UK:Google:Stock-Vest         -244.94 USD
+
+2023-11-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {122.47 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -244.94 USD
+
+2023-11-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           988.80 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -988.80 GBP
+
+2023-11-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          12 VWRL {82.40 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -988.80 GBP
+
+2023-11-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           741.60 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -741.60 GBP
+
+2023-11-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          9 VWRL {82.40 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -741.60 GBP
+
+2023-11-02 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    87.38 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -87.38 GBP
+
+2023-11-06 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    36.05 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -36.05 GBP
+
+2023-11-22 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    91.37 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -91.37 GBP
+
+2023-11-24 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    78.80 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -78.80 GBP
+
+2023-11-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2023-11-28 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    48.09 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -48.09 GBP
+
+2023-11-29 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   53.24 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -53.24 GBP
+
+2023-12-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2023-12-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2023-12-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       264.64 USD
+  Income:Lalit:UK:Google:Stock-Vest         -264.64 USD
+
+2023-12-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {132.32 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -264.64 USD
+
+2023-12-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           959.31 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -959.31 GBP
+
+2023-12-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          11 VWRL {87.21 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -959.31 GBP
+
+2023-12-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           784.89 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -784.89 GBP
+
+2023-12-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          9 VWRL {87.21 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -784.89 GBP
+
+2023-12-02 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    57.84 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -57.84 GBP
+
+2023-12-05 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    117.51 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -117.51 GBP
+
+2023-12-11 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    41.17 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -41.17 GBP
+
+2023-12-17 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    57.25 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -57.25 GBP
+
+2023-12-23 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    34.09 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -34.09 GBP
+
+2023-12-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2023-12-30 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   23.59 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -23.59 GBP
+
+2024-01-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2024-01-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2024-01-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       279.74 USD
+  Income:Lalit:UK:Google:Stock-Vest         -279.74 USD
+
+2024-01-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {139.87 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -279.74 USD
+
+2024-01-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           997.81 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -997.81 GBP
+
+2024-01-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          11 VWRL {90.71 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -997.81 GBP
+
+2024-01-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           725.68 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -725.68 GBP
+
+2024-01-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          8 VWRL {90.71 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -725.68 GBP
+
+2024-01-08 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    56.12 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -56.12 GBP
+
+2024-01-15 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    115.07 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -115.07 GBP
+
+2024-01-17 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   49.69 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -49.69 GBP
+
+2024-01-25 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    75.38 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -75.38 GBP
+
+2024-01-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2024-02-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2024-02-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2024-02-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       305.28 USD
+  Income:Lalit:UK:Google:Stock-Vest         -305.28 USD
+
+2024-02-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {152.64 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -305.28 USD
+
+2024-02-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           918.60 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -918.60 GBP
+
+2024-02-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          10 VWRL {91.86 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -918.60 GBP
+
+2024-02-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           734.88 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -734.88 GBP
+
+2024-02-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          8 VWRL {91.86 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -734.88 GBP
+
+2024-02-01 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   28.22 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -28.22 GBP
+
+2024-02-14 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    72.71 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -72.71 GBP
+
+2024-02-20 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   76.89 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -76.89 GBP
+
+2024-02-21 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    31.70 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -31.70 GBP
+
+2024-02-25 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   28.28 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -28.28 GBP
+
+2024-02-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2024-03-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2024-03-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2024-03-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       274.08 USD
+  Income:Lalit:UK:Google:Stock-Vest         -274.08 USD
+
+2024-03-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {137.04 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -274.08 USD
+
+2024-03-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           961.90 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -961.90 GBP
+
+2024-03-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          10 VWRL {96.19 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -961.90 GBP
+
+2024-03-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           769.52 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -769.52 GBP
+
+2024-03-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          8 VWRL {96.19 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -769.52 GBP
+
+2024-03-11 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    90.90 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -90.90 GBP
+
+2024-03-23 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    67.20 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -67.20 GBP
+
+2024-03-24 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    99.37 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -99.37 GBP
+
+2024-03-24 * "Nando's" "Dinner"
+  Expenses:Food:Restaurant                   53.02 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -53.02 GBP
+
+2024-03-25 * "Amex" "Payment"
+  Liabilities:Lalit:UK:Amex:GBP              500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -500.00 GBP
+
+2024-03-30 * "Tesco" "Groceries"
+  Expenses:Food:Groceries                    81.67 GBP
+  Liabilities:Lalit:UK:Amex:GBP             -81.67 GBP
+
+2024-04-01 * "Google" "Salary"
+  Assets:Lalit:UK:HSBC:Current:GBP          3500.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2024-04-01 * "Landlord" "Rent"
+  Expenses:Housing:Rent                      1200.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2024-04-01 * "Google" "RSU Vest"
+  Assets:Lalit:US:Schwab:Brokerage:USD       302.24 USD
+  Income:Lalit:UK:Google:Stock-Vest         -302.24 USD
+
+2024-04-01 * "Schwab" "Buy GOOG"
+  Assets:Lalit:US:Schwab:Brokerage:GOOG      2 GOOG {151.12 USD}
+  Assets:Lalit:US:Schwab:Brokerage:USD      -302.24 USD
+
+2024-04-01 * "Vanguard" "ISA Transfer"
+  Assets:Lalit:UK:Vanguard:ISA:GBP           986.80 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -986.80 GBP
+
+2024-04-01 * "Vanguard" "ISA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL          10 VWRL {98.68 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP          -986.80 GBP
+
+2024-04-01 * "Vanguard" "GIA Transfer"
+  Assets:Lalit:UK:Vanguard:GIA:GBP           789.44 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP          -789.44 GBP
+
+2024-04-01 * "Vanguard" "GIA Buy VWRL"
+  Assets:Lalit:UK:Vanguard:GIA:VWRL          8 VWRL {98.68 GBP}
+  Assets:Lalit:UK:Vanguard:GIA:GBP          -789.44 GBP
+
+include "prices.beancount"

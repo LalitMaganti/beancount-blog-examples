@@ -1,0 +1,84 @@
+; Example transactions including investments and payslip
+
+; Regular transactions
+2024-01-15 * "Tesco" "Weekly groceries"
+  Expenses:Groceries                    85.50 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2024-01-20 * "TfL" "Monthly travel card"
+  Expenses:Transport                   180.00 GBP
+  Liabilities:Lalit:UK:AMEX:GBP
+
+; Cross-bank transfer using transit account
+2024-03-16 * "Transfer to Barclays"
+  Assets:Lalit:UK:HSBC:Current:GBP      -1000.00 GBP
+  Assets:Lalit:Transfers:Internal        1000.00 GBP
+
+2024-03-18 * "Transfer from HSBC"
+  Assets:Lalit:Transfers:Internal       -1000.00 GBP
+  Assets:Lalit:UK:Barclays:Current:GBP   1000.00 GBP
+
+; Transfer to account not yet tracked - use named Equity placeholder
+2024-03-15 * "Transfer to savings (not yet tracked)"
+  Assets:Lalit:UK:HSBC:Current:GBP     -500.00 GBP
+  Equity:Transfers:Natwest-Savings      500.00 GBP
+
+; Payslip with full breakdown (GROSS view shows all lines)
+; In NET view, all payslip accounts collapse to Net-Income
+2024-01-25 * "Google" "January salary"
+  Assets:Lalit:UK:HSBC:Current:GBP           3500.00 GBP  ; Take-home pay
+  Income:Lalit:UK:Google:Salary           -5000.00 GBP  ; Gross salary
+  Expenses:Lalit:UK:Google:Income-Tax        1000.00 GBP  ; Tax withheld
+  Expenses:Lalit:UK:Google:National-Insurance 400.00 GBP  ; NI contribution
+  Expenses:Lalit:UK:Google:Pension            100.00 GBP  ; Pension contribution
+
+; Fund brokerage account
+2024-01-05 * "Transfer to IB"
+  Assets:Lalit:US:IB:Brokerage:USD    5000.00 USD
+  Equity:Opening-Balances
+
+; Buy stock - note the cost basis {price}
+2024-01-10 * "BUY AAPL"
+  Assets:Lalit:US:IB:Brokerage:AAPL      10 AAPL {185.00 USD} @ 185.00 USD
+  Assets:Lalit:US:IB:Brokerage:USD   -1850.00 USD
+
+; Receive dividend
+2024-01-20 * "AAPL Dividend"
+  Assets:Lalit:US:IB:Brokerage:USD       2.40 USD
+  Income:Lalit:US:IB:Brokerage:AAPL:Dividends
+
+; Sell stock - {cost basis} @ selling price
+2024-01-30 * "SELL AAPL"
+  Assets:Lalit:US:IB:Brokerage:AAPL      -5 AAPL {185.00 USD} @ 190.00 USD
+  Assets:Lalit:US:IB:Brokerage:USD     950.00 USD
+  Income:Lalit:US:IB:Brokerage:AAPL:Capital-Gains  -25.00 USD
+
+; Buy UK fund in ISA
+2024-01-05 * "Fund ISA"
+  Assets:Lalit:UK:Vanguard:ISA:GBP    2000.00 GBP
+  Equity:Opening-Balances
+
+2024-01-15 * "BUY VWRL"
+  Assets:Lalit:UK:Vanguard:ISA:VWRL     20 VWRL {96.00 GBP}
+  Assets:Lalit:UK:Vanguard:ISA:GBP  -1920.00 GBP
+
+; --- Multi-currency examples ---
+; Fund IG ISA with GBP
+2024-02-01 * "Fund IG ISA"
+  Assets:Lalit:UK:IG:ISA:GBP         2000.00 GBP
+  Equity:Opening-Balances
+
+; Brokerage holds USD - no conversion at trade time
+2024-02-15 * "BUY AAPL"
+  Assets:Lalit:US:IB:Brokerage:AAPL         10 AAPL {185.00 USD}
+  Assets:Lalit:US:IB:Brokerage:USD      -1850.00 USD
+
+; Brokerage holds GBP - converts on the fly, @@ specifies total price
+2024-02-15 * "BUY AAPL"
+  Assets:Lalit:UK:IG:ISA:AAPL               10 AAPL {185.00 USD}
+  Assets:Lalit:UK:IG:ISA:GBP            -1480.00 GBP @@ 1850.00 USD
+
+; Example 2: Buying Currency
+2024-03-02 * "Wise" "GBP to INR"
+  Assets:Lalit:UK:Wise:INR            98000.00 INR @@ 950.00 GBP
+  Assets:Lalit:UK:Wise:GBP             -950.00 GBP

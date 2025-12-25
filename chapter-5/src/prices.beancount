@@ -1,0 +1,12 @@
+; Price history for investments
+; In practice, these are auto-fetched daily
+
+2024-01-10 price AAPL  185.50 USD
+2024-01-15 price AAPL  190.25 USD
+2024-01-31 price AAPL  188.00 USD
+
+2024-01-15 price VWRL  95.20 GBP
+2024-01-31 price VWRL  97.50 GBP
+
+2024-01-10 price USD   0.79 GBP
+2024-01-31 price USD   0.80 GBP

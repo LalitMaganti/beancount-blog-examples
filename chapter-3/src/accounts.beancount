@@ -1,0 +1,22 @@
+; Account hierarchy: Assets:Person:Region:Bank:Account:Currency
+
+; Asset accounts
+2024-01-01 open Assets:Lalit:UK:HSBC:Current:GBP          GBP
+2024-01-01 open Assets:Lalit:UK:Barclays:Current:GBP      GBP
+2024-01-01 open Assets:Lalit:UK:Barclays:Savings:GBP      GBP
+2024-01-01 open Assets:Lalit:Transfers:Internal           GBP
+
+; Liability accounts
+2024-01-01 open Liabilities:Lalit:UK:AMEX:GBP             GBP
+
+; Expense accounts (shared - no person prefix)
+2024-01-01 open Expenses:Groceries                        GBP
+2024-01-01 open Expenses:Transport                        GBP
+2024-01-01 open Expenses:Bills:Energy                     GBP
+
+; Revenue accounts
+2024-01-01 open Income:Lalit:UK:Google:Salary             GBP
+
+; Equity - one account per untracked destination (best practice)
+2024-01-01 open Equity:Transfers:Natwest-Savings          GBP
+2024-01-01 open Equity:Opening-Balances                   GBP

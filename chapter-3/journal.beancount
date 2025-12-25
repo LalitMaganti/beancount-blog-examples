@@ -1,0 +1,8 @@
+; Chapter 3: Importers
+; Single person tracking a few accounts with import infrastructure
+
+option "operating_currency" "GBP"
+
+include "src/accounts.beancount"
+include "src/balance.beancount"
+include "src/transactions.beancount"

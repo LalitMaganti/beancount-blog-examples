@@ -1,0 +1,10 @@
+             account                 value       cost    unreal  cur
+---------------------------------  ---------  ---------  ------  ---
+Assets:Lalit:UK:HSBC:Current:GBP     4914.50    4914.50    0.00  GBP
+Assets:Lalit:UK:HSBC:Savings:GBP     5000.00    5000.00    0.00  GBP
+Assets:Lalit:UK:Vanguard:ISA:GBP       80.00      80.00    0.00  GBP
+Assets:Lalit:UK:Vanguard:ISA:VWRL    1950.00    1920.00   30.00  GBP
+Assets:Lalit:US:IB:Brokerage:AAPL     752.00     730.75   21.25  GBP
+Assets:Lalit:US:IB:Brokerage:USD     3281.92    3240.90   41.02  GBP
+Equity:Earnings:Current             -3436.42   -3436.42    0.00  GBP
+Equity:Opening-Balances            -12500.00  -12450.00  -50.00  GBP

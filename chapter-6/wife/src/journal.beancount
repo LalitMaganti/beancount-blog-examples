@@ -1,0 +1,4 @@
+; Wife's base journal (includes everything)
+
+include "accounts.beancount"
+include "transactions.beancount"

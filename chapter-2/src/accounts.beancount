@@ -1,0 +1,25 @@
+; Account definitions following naming convention:
+; Type:Person:Region:Institution:Account:Currency
+
+; Assets - bank accounts
+2024-01-01 open Assets:Lalit:UK:HSBC:Current:GBP          GBP
+2024-01-01 open Assets:Lalit:UK:Barclays:Current:GBP      GBP
+2024-01-01 open Assets:Lalit:UK:Barclays:Savings:GBP      GBP
+
+; Assets - transit accounts (for money in flight)
+2024-01-01 open Assets:Lalit:Transfers:Internal           GBP
+
+; Liabilities
+2024-01-01 open Liabilities:Lalit:UK:AMEX:GBP             GBP
+
+; Income
+2024-01-01 open Income:Lalit:UK:Google:Salary           GBP
+
+; Expenses
+2024-01-01 open Expenses:Groceries                        GBP
+2024-01-01 open Expenses:Bills:Energy                     GBP
+2024-01-01 open Expenses:Transport                        GBP
+
+; Equity - boundary accounts for untracked destinations
+2024-01-01 open Equity:Opening-Balances                   GBP
+2024-01-01 open Equity:Transfers:Natwest-Savings          GBP

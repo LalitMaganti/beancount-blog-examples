@@ -1,0 +1,13 @@
+; Commodity definitions for stocks and funds
+
+1990-01-01 commodity GBP
+1990-01-01 commodity USD
+
+1990-01-01 commodity AAPL
+  name: "Apple Inc"
+
+1990-01-01 commodity VWRL
+  name: "Vanguard FTSE All-World ETF"
+
+1990-01-01 commodity VOO
+  name: "Vanguard S&P 500 ETF"

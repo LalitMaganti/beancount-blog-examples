@@ -1,0 +1,19 @@
+; Lalit's transactions
+
+2024-01-05 * "Opening balance"
+  Assets:Lalit:UK:HSBC:Current:GBP    5000.00 GBP
+  Equity:Opening-Balances
+
+2024-01-25 * "Google" "January salary"
+  Assets:Lalit:UK:HSBC:Current:GBP    3500.00 GBP
+  Income:Lalit:UK:Google:Net-Income
+
+; Lalit pays for shared groceries
+2024-01-15 * "Tesco" "Weekly groceries"
+  Expenses:Groceries                    85.50 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+; Lalit transfers money to Wife
+2024-01-20 * "Transfer to Wife for bills"
+  Expenses:Lalit:Transfers:Wife       500.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP

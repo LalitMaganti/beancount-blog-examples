@@ -1,0 +1,11 @@
+; Shared expense accounts (no person prefix)
+; These are used by both people
+
+2024-01-01 open Expenses:Groceries                   GBP
+2024-01-01 open Expenses:Transport                   GBP
+2024-01-01 open Expenses:Bills:Energy                GBP
+2024-01-01 open Expenses:Bills:Internet              GBP
+2024-01-01 open Expenses:Food:Restaurant             GBP
+
+; Equity accounts
+2024-01-01 open Equity:Opening-Balances              GBP

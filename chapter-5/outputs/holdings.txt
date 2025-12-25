@@ -1,0 +1,8 @@
+             account                units   curr  avg_co  price   book_va  mkt_val
+---------------------------------  -------  ----  ------  ------  -------  -------
+Assets:Lalit:UK:HSBC:Current:GBP   4914.50  GBP     1.00    1.00  4914.50  4914.50
+Assets:Lalit:UK:HSBC:Savings:GBP   5000.00  GBP     1.00    1.00  5000.00  5000.00
+Assets:Lalit:UK:Vanguard:ISA:GBP     80.00  GBP     1.00    1.00    80.00    80.00
+Assets:Lalit:UK:Vanguard:ISA:VWRL    20.00  VWRL   96.00   97.50  1920.00  1950.00
+Assets:Lalit:US:IB:Brokerage:AAPL     5.00  AAPL  146.15  150.40   730.75   752.00
+Assets:Lalit:US:IB:Brokerage:USD   4102.40  USD     0.79    0.80  3240.90  3281.92

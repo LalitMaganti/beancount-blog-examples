@@ -1,0 +1,41 @@
+; Account hierarchy: Assets:Person:Region:Bank:Account:Currency
+
+; Asset accounts - Banking
+2024-01-01 open Assets:Lalit:UK:HSBC:Current:GBP          GBP
+2024-01-01 open Assets:Lalit:UK:Barclays:Current:GBP      GBP
+2024-01-01 open Assets:Lalit:UK:Barclays:Savings:GBP      GBP
+2024-01-01 open Assets:Lalit:UK:Wise:GBP                  GBP
+2024-01-01 open Assets:Lalit:UK:Wise:INR                  INR
+2024-01-01 open Assets:Lalit:Transfers:Internal           GBP,USD
+
+; Equity - boundary accounts
+2024-01-01 open Equity:Transfers:Natwest-Savings          GBP
+
+; Asset accounts - Investments
+2024-01-01 open Assets:Lalit:US:IB:Brokerage:USD          USD
+2024-01-01 open Assets:Lalit:US:IB:Brokerage:AAPL         AAPL
+2024-01-01 open Assets:Lalit:UK:Vanguard:ISA:GBP          GBP
+2024-01-01 open Assets:Lalit:UK:Vanguard:ISA:VWRL         VWRL
+2024-01-01 open Assets:Lalit:UK:IG:ISA:GBP                GBP
+2024-01-01 open Assets:Lalit:UK:IG:ISA:AAPL               AAPL
+
+; Investment revenue accounts (per-security)
+2024-01-01 open Income:Lalit:US:IB:Brokerage:AAPL:Capital-Gains    USD
+2024-01-01 open Income:Lalit:US:IB:Brokerage:AAPL:Dividends        USD
+2024-01-01 open Income:Lalit:UK:IG:ISA:AAPL:Capital-Gains          USD
+2024-01-01 open Income:Lalit:UK:Vanguard:ISA:VWRL:Capital-Gains    GBP
+
+; Liability accounts
+2024-01-01 open Liabilities:Lalit:UK:AMEX:GBP             GBP
+
+; Expense accounts (shared - no person prefix)
+2024-01-01 open Expenses:Groceries                        GBP
+2024-01-01 open Expenses:Transport                        GBP
+2024-01-01 open Expenses:Bills:Energy                     GBP
+
+; Revenue accounts
+2024-01-01 open Income:Lalit:UK:Google:Salary           GBP
+
+; Equity
+2024-01-01 open Equity:Transfers:Untracked                GBP
+2024-01-01 open Equity:Opening-Balances                   GBP,USD

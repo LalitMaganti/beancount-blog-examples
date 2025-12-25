@@ -1,0 +1,46 @@
+; Transactions demonstrating Chapter 2 concepts
+
+; --- Regular transactions ---
+
+2024-01-15 * "Tesco" "Weekly groceries"
+  Expenses:Groceries                    85.50 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2024-01-25 * "Google" "January salary"
+  Assets:Lalit:UK:HSBC:Current:GBP    3200.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+2024-02-01 * "British Gas" "Energy bill"
+  Expenses:Bills:Energy                120.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+; --- Transit account example ---
+; Money takes time to move between banks
+
+; Saturday: money leaves HSBC
+2024-03-16 * "Transfer to Barclays"
+  Assets:Lalit:UK:HSBC:Current:GBP      -1000.00 GBP
+  Assets:Lalit:Transfers:Internal        1000.00 GBP
+
+; Monday: money arrives at Barclays
+2024-03-18 * "Transfer from HSBC"
+  Assets:Lalit:Transfers:Internal       -1000.00 GBP
+  Assets:Lalit:UK:Barclays:Current:GBP   1000.00 GBP
+
+; --- Boundary account example ---
+; Money going to an account you're not tracking yet
+
+2024-03-15 * "Transfer to savings (not yet tracked)"
+  Assets:Lalit:UK:HSBC:Current:GBP     -500.00 GBP
+  Equity:Transfers:Natwest-Savings      500.00 GBP
+  ; When you add Natwest to your system, search-replace this account
+
+; --- Credit card transactions ---
+
+2024-02-10 * "TfL" "Monthly travelcard"
+  Expenses:Transport                   180.00 GBP
+  Liabilities:Lalit:UK:AMEX:GBP
+
+2024-02-28 * "AMEX Payment"
+  Liabilities:Lalit:UK:AMEX:GBP        180.00 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP

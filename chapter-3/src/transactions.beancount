@@ -1,0 +1,27 @@
+; Example transactions
+
+2024-01-15 * "Tesco" "Weekly groceries"
+  Expenses:Groceries                    85.50 GBP
+  Assets:Lalit:UK:HSBC:Current:GBP
+
+2024-01-20 * "TfL" "Monthly travel card"
+  Expenses:Transport                   180.00 GBP
+  Liabilities:Lalit:UK:AMEX:GBP
+
+2024-01-25 * "Google" "January salary"
+  Assets:Lalit:UK:HSBC:Current:GBP    3200.00 GBP
+  Income:Lalit:UK:Google:Salary
+
+; Cross-bank transfer using transit account
+2024-03-16 * "Transfer to Barclays"
+  Assets:Lalit:UK:HSBC:Current:GBP      -1000.00 GBP
+  Assets:Lalit:Transfers:Internal        1000.00 GBP
+
+2024-03-18 * "Transfer from HSBC"
+  Assets:Lalit:Transfers:Internal       -1000.00 GBP
+  Assets:Lalit:UK:Barclays:Current:GBP   1000.00 GBP
+
+; Transfer to account not yet tracked - use named Equity placeholder
+2024-03-15 * "Transfer to savings (not yet tracked)"
+  Assets:Lalit:UK:HSBC:Current:GBP     -500.00 GBP
+  Equity:Transfers:Natwest-Savings      500.00 GBP

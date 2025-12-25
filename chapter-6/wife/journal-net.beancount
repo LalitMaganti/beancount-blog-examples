@@ -1,0 +1,14 @@
+; Wife's NET view
+
+option "operating_currency" "GBP"
+
+; Fava extensions
+2024-01-01 custom "fava-extension" "fava_dashboards"
+
+include "../common/src/commodities.beancount"
+include "../common/src/accounts.beancount"
+include "src/journal.beancount"
+
+; Inter-person transfer accounts
+2024-01-01 open Expenses:Wife:Transfers:Lalit       GBP
+2024-01-01 open Income:Wife:Transfers:Lalit       GBP
