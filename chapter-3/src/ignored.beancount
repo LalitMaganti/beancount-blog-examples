@@ -1,0 +1,2 @@
+; Transactions explicitly skipped during import review.
+; beancount-import writes here when you choose to ignore a transaction.

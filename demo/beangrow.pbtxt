@@ -1,0 +1,42 @@
+investments {
+  # GOOG at Schwab
+  investment {
+    currency: "GOOG"
+    asset_account: "Assets:Lalit:US:Schwab:Brokerage:GOOG"
+    cash_accounts: "Assets:Lalit:US:Schwab:Brokerage:USD"
+  }
+
+  # VWRL at Vanguard ISA
+  investment {
+    currency: "VWRL"
+    asset_account: "Assets:Lalit:UK:Vanguard:ISA:VWRL"
+    cash_accounts: "Assets:Lalit:UK:Vanguard:ISA:GBP"
+  }
+
+  # VWRL at Vanguard GIA
+  investment {
+    currency: "VWRL"
+    asset_account: "Assets:Lalit:UK:Vanguard:GIA:VWRL"
+    cash_accounts: "Assets:Lalit:UK:Vanguard:GIA:GBP"
+  }
+}
+
+groups {
+  group {
+    name: "strategy.tech"
+    investment: "Assets:Lalit:US:Schwab:Brokerage:GOOG"
+  }
+  group {
+    name: "strategy.passive"
+    investment: "Assets:Lalit:UK:Vanguard:ISA:VWRL"
+    investment: "Assets:Lalit:UK:Vanguard:GIA:VWRL"
+  }
+  group {
+    name: "strategy.isa"
+    investment: "Assets:Lalit:UK:Vanguard:ISA:VWRL"
+  }
+  group {
+    name: "strategy.gia"
+    investment: "Assets:Lalit:UK:Vanguard:GIA:VWRL"
+  }
+}

@@ -1,0 +1,40 @@
+investments {
+  # AAPL at Interactive Brokers
+  investment {
+    currency: "AAPL"
+    asset_account: "Assets:Lalit:US:IB:Brokerage:AAPL"
+    cash_accounts: "Assets:Lalit:US:IB:Brokerage:USD"
+    dividend_accounts: "Income:Lalit:US:IB:Brokerage:AAPL:Dividends"
+  }
+
+  # AAPL at IG ISA (UK)
+  investment {
+    currency: "AAPL"
+    asset_account: "Assets:Lalit:UK:IG:ISA:AAPL"
+    cash_accounts: "Assets:Lalit:UK:IG:ISA:GBP"
+  }
+
+  # VWRL at Vanguard ISA
+  investment {
+    currency: "VWRL"
+    asset_account: "Assets:Lalit:UK:Vanguard:ISA:VWRL"
+    cash_accounts: "Assets:Lalit:UK:Vanguard:ISA:GBP"
+  }
+}
+
+groups {
+  group {
+    name: "strategy.tech"
+    investment: "Assets:Lalit:US:IB:Brokerage:AAPL"
+    investment: "Assets:Lalit:UK:IG:ISA:AAPL"
+  }
+  group {
+    name: "strategy.passive"
+    investment: "Assets:Lalit:UK:Vanguard:ISA:VWRL"
+  }
+  group {
+    name: "strategy.isa"
+    investment: "Assets:Lalit:UK:IG:ISA:AAPL"
+    investment: "Assets:Lalit:UK:Vanguard:ISA:VWRL"
+  }
+}
